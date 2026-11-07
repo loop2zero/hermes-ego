@@ -1,0 +1,23 @@
+# systemd user unit for the relay on the Linux VPS.
+# Install:
+#   mkdir -p ~/.config/systemd/user ~/.config/hermes-ego
+#   cp deploy/relay.env.example ~/.config/hermes-ego/relay.env && chmod 600 ~/.config/hermes-ego/relay.env
+#   # edit the token, then:
+#   cp deploy/hermes-ego-relay.service ~/.config/systemd/user/
+#   # adjust WorkingDirectory and ExecStart if the checkout is not ~/hermes-ego
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now hermes-ego-relay
+# Keep it running without a login session: loginctl enable-linger "$USER"
+[Unit]
+Description=hermes-ego relay (Mac daemon WebSocket <-> Hermes MCP)
+After=network-online.target
+
+[Service]
+WorkingDirectory=%h/hermes-ego
+EnvironmentFile=%h/.config/hermes-ego/relay.env
+ExecStart=%h/hermes-ego/.venv/bin/python -m relay
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target

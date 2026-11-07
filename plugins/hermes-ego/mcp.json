@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "ego": {
+      "type": "streamable-http",
+      "url": "http://127.0.0.1:8767/mcp",
+      "headers": {
+        "Authorization": "Bearer ${EGO_RELAY_TOKEN}"
+      }
+    }
+  }
+}

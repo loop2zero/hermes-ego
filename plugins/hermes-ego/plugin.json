@@ -1,0 +1,32 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "hermes-ego",
+  "version": "0.1.0",
+  "description": "Hermes Ego reads and saves pages from the user's ego(lite) browser through a loopback MCP relay. The Mac daemon and the relay are installed separately.",
+  "author": {
+    "name": "Shawn Yuan",
+    "url": "https://github.com/loop2zero/hermes-ego"
+  },
+  "homepage": "https://github.com/loop2zero/hermes-ego",
+  "repository": "https://github.com/loop2zero/hermes-ego",
+  "license": "MIT",
+  "keywords": ["ego", "mcp", "browser", "macos", "hermes"],
+  "extensions": {
+    "com.nousresearch.hermes": {
+      "config_schema": {
+        "relay_token": {
+          "type": "secret",
+          "env": "EGO_RELAY_TOKEN",
+          "label": "Relay token",
+          "description": "Bearer token for the loopback relay. Same value as EGO_RELAY_TOKEN on the relay. Hermes stores it in the profile .env.",
+          "required": true
+        }
+      },
+      "servers": {
+        "ego": {
+          "trust": "untrusted"
+        }
+      }
+    }
+  }
+}

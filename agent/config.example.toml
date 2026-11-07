@@ -1,0 +1,13 @@
+# Copy to ~/.config/hermes-ego/config.toml and chmod 600.
+# The daemon reads this file on startup. The token is the same value as
+# EGO_RELAY_TOKEN on the relay. It is sent in the WebSocket hello, not in the URL.
+
+relay_url = "wss://ego.example.com/agent"
+token = "replace-with-the-relay-token"
+device = "macbook"
+
+# Optional. Default: ego-browser on PATH, else ~/.local/bin/ego-browser.
+# ego_browser = "/Users/you/.local/bin/ego-browser"
+
+# Optional. Default: ~/.local/state/hermes-ego/daemon.log
+# log_path = "/Users/you/.local/state/hermes-ego/daemon.log"

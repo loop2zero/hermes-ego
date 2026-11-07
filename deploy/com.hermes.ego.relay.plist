@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Mac launchd agent for mode A, where the relay runs on the same Mac as the daemon.
+  install.sh fills __HOME__, __REPO__, and __PYTHON__. Linux uses the systemd unit.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.hermes.ego.relay</string>
+    <key>WorkingDirectory</key>
+    <string>__REPO__</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>HERMES_EGO_ENV</key>
+        <string>__HOME__/.config/hermes-ego/relay.env</string>
+    </dict>
+    <key>ProgramArguments</key>
+    <array>
+        <string>__PYTHON__</string>
+        <string>-m</string>
+        <string>relay</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>ThrottleInterval</key>
+    <integer>5</integer>
+    <key>StandardOutPath</key>
+    <string>__HOME__/.local/state/hermes-ego/relay.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>__HOME__/.local/state/hermes-ego/relay.err.log</string>
+</dict>
+</plist>

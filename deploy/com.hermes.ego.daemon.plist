@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  launchd agent for the Mac daemon. It only dials out; it does not listen.
+  Replace /Users/YOU with the macOS home directory, then:
+    mkdir -p ~/Library/LaunchAgents ~/.local/state/hermes-ego
+    cp deploy/com.hermes.ego.daemon.plist ~/Library/LaunchAgents/
+    launchctl bootstrap gui/$UID ~/Library/LaunchAgents/com.hermes.ego.daemon.plist
+  Stop / remove:
+    launchctl bootout gui/$UID/com.hermes.ego.daemon
+  The daemon reconnects on its own. KeepAlive restarts it if the process exits.
+  Config is ~/.config/hermes-ego/config.toml (not in this plist).
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.hermes.ego.daemon</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/YOU/hermes-ego/.venv/bin/python</string>
+        <string>/Users/YOU/hermes-ego/agent/hermes_ego_daemon.py</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>ThrottleInterval</key>
+    <integer>5</integer>
+    <key>StandardOutPath</key>
+    <string>/Users/YOU/.local/state/hermes-ego/launchd.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/YOU/.local/state/hermes-ego/launchd.err.log</string>
+</dict>
+</plist>
